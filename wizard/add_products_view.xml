@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- Production Order -->  
+        <record id="view_mo_add_product_form" model="ir.ui.view">
+            <field name="name">Mo Add Product form</field>
+            <field name="model">stock.move.add</field>
+            <field name="arch" type="xml">
+            <form string="Stock Moves">
+                <group>
+                    <group>
+                        <field name="product_id"/>
+                        <label for="product_qty"/>
+                        <div>
+                            <field name="product_qty" class="oe_inline"/>
+                            <field name="product_uom" string="Unit Of Measure" class="oe_inline" invisible='1'/>
+                        </div>
+<!--                             <label for="product_uos_qty" />
+                            <div>
+                                <field name="product_uos_qty" class="oe_inline"/>
+                                <field name="product_uos" class="oe_inline"/>
+                            </div> -->
+                    </group>
+                    <group>                                
+                        <field name="date_expected"/>
+
+                        <field name="location_id" domain="[('usage','=','internal')]"/>
+                        <field name="location_dest_id" domain="[('usage','=','production')]"/>
+                        
+<!--                         <label for="prodlot_id"/>
+                        <div>
+                        	<field name="prodlot_id" context="{'location_id':location_id, 'product_id':product_id}" domain="[('product_id','=?',product_id)]" class="oe_inline"/>
+                        </div> -->
+                    </group>
+                </group>
+                <footer>
+                    <button name="add_mo_product" string="Add Products" type="object" class="oe_highlight"/>
+	                 or
+	                <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+            </field>
+        </record>
+
+
+        <record id="action_mo_add_product" model="ir.actions.act_window">
+            <field name="name">Add Products</field>
+            <field name="res_model">stock.move.add</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="domain">[]</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_mo_add_product_form"/>
+            <field name="context">{}</field>
+        </record>
+
+
+    </data>
+</openerp>
