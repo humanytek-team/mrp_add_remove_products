@@ -136,6 +136,7 @@ class stock_move_add(models.TransientModel):
         new_move = self.browse(self.ids)[0]
         mrp_obj = self.env['mrp.production']
         production = mrp_obj.browse(self.env.context.get('mo_id', False) or self.env.context.get('active_id', False))
+        found = False
         for move in production.move_raw_ids:
             if (move.product_id.id == new_move.product_id.id) and (move.state not in ('cancel', 'done')):
                 if move.procure_method != 'make_to_order':  # SI ES BAJO PEDIDO SE TIENE QUE AGREGAR EN OTRA LINEA, NO LA MISMA
@@ -145,5 +146,8 @@ class stock_move_add(models.TransientModel):
                     new_qty = old_move.product_qty + new_move.product_qty
                     vals = {'product_uom_qty': move.product_qty + qty_in_line_uom, 'unit_factor': new_qty / (production.product_qty - production.qty_produced)}
                     self.env['stock.move'].browse(move.id).write(vals)
+                    found = True
                     break
+        if not found:
+            self.add_production_consume_line(new_move, production)
         return True
