@@ -15,14 +15,11 @@
                 <field name="product_qty" class="oe_inline"/>
                 <field name="product_uom" string="Unit Of Measure" class="oe_inline" invisible='1'/>
               </div>
-              <!-- <label for="product_uos_qty" /> <div> <field name="product_uos_qty" class="oe_inline"/> <field name="product_uos" class="oe_inline"/> </div> -->
             </group>
             <group>
               <field name="date_expected"/>
               <field name="location_id" domain="[('usage','=','internal')]"/>
               <field name="location_dest_id" domain="[('usage','=','production')]"/>
-
-              <!-- <label for="prodlot_id"/> <div> <field name="prodlot_id" context="{'location_id':location_id, 'product_id':product_id}" domain="[('product_id','=?',product_id)]" class="oe_inline"/> </div> -->
             </group>
           </group>
           <footer>
