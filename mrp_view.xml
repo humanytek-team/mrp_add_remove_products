@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-    <data>
-
-<!--     <record id="ir_mo_add_product" model="ir.values">
-        <field name="key2">tree_but_action</field>
-        <field name="model">stock.move.add</field>
-        <field name="name">Add Products</field>
-        <field eval="'ir.actions.act_window,'+str(action_mo_add_product)" name="value"/>
-    </record> -->
-
-
+  <data>
     <!-- Production Order -->
-        <record id="mrp_add_remove_products_production_form_view" model="ir.ui.view">
-            <field name="name">mrp.production.form</field>
-            <field name="model">mrp.production</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='move_raw_ids']/tree/button[@name='split_move_lot']" position="after">
-                        <button name="action_consume_cancel" string="Cancel Move" type="object" icon="fa-times-circle" states="draft,waiting,confirmed,assigned"/>
-                </xpath>
-                <xpath expr="//field[@name='move_raw_ids']" position="after">
-                        <button name="%(mrp_add_remove_products.action_mo_add_product)d" string="Agregar Productos" type="action" states="confirmed" context="{'mo_id': active_id, 'location_id': location_src_id}" colspan="2"/>
-                        <!-- <button name="%(mrp_add_remove_products.action_mo_add_product)d" string="Agregar Productos" type="action" states="ready,progress,planned,confirmed" context="{'mo_id': active_id, 'location_id': location_src_id}" colspan="2"/> -->
-                </xpath>
-            </field>
-        </record>
-        
-    </data>
+    <record id="mrp_add_remove_products_production_form_view" model="ir.ui.view">
+      <field name="name">mrp.production.form</field>
+      <field name="model">mrp.production</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='move_raw_ids']/tree/button[@name='split_move_lot']" position="after">
+          <button name="action_consume_cancel" string="Cancel Move" type="object" icon="fa-times-circle" states="draft,waiting,confirmed,assigned"/>
+        </xpath>
+        <xpath expr="//field[@name='move_raw_ids']" position="after">
+          <button name="%(mrp_add_remove_products.action_mo_add_product)d" string="Agregar Productos" type="action" states="confirmed" context="{'mo_id': active_id, 'location_id': location_src_id}" colspan="2"/>
+        </xpath>
+      </field>
+    </record>
+  </data>
 </openerp>

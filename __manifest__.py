@@ -1,23 +1,19 @@
 # -*- coding: utf-8 -*-
 {
-    'name' : 'Add products to bom in manufacturing orders',
+    'name': 'Add products to bom in manufacturing orders',
     'summary': '',
     'author': 'Humanytek',
+    'version': '1.0.1',
     'description': """
     """,
-    'category' : 'Mrp',
-    'images' : [],
-    'depends' : ['mrp','stock','procurement'],
+    'category': 'Mrp',
+    'depends': [
+        'mrp',
+        'procurement',
+        'stock',
+    ],
     'data': [
         'wizard/add_products_view.xml',
         'mrp_view.xml',
     ],
-    'demo': [
-
-    ],
-    'qweb': [
-    ],
-    'installable': True,
-    'application': True,
-    'auto_install': False,
 }

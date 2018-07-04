@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api, _
-from openerp.exceptions import UserError, RedirectWarning, ValidationError
+from openerp.exceptions import UserError
 
-#PARA FECHAS
-from datetime import datetime, timedelta
-
-##### SOLUCIONA CUALQUIER ERROR DE ENCODING (CARACTERES ESPECIALES)
+# SOLUCIONA CUALQUIER ERROR DE ENCODING (CARACTERES ESPECIALES)
 import sys
-reload(sys)  
+reload(sys)
 sys.setdefaultencoding('utf8')
+
 
 class stock_move(models.Model):
     _inherit = "stock.move"
@@ -18,11 +16,10 @@ class stock_move(models.Model):
 
     @api.multi
     def action_consume_cancel(self):
-        """ Cancels the moves and if all moves are cancelled it cancels the picking. """
+        """Cancel the moves and if all moves are cancelled it cancels the picking."""
         # TDE DUMB: why is cancel_procuremetn in ctx we do quite nothing ?? like not updating the move ??
         if any(move.state == 'done' for move in self):
             raise UserError(_('You cannot cancel a stock move that has been set to \'Done\'.'))
-
         procurements = self.env['procurement.order']
         for move in self:
             if move.reserved_quant_ids:
@@ -30,7 +27,6 @@ class stock_move(models.Model):
             if self.env.context.get('cancel_procurement'):
                 if move.propagate:
                     pass
-                    # procurements.search([('move_dest_id', '=', move.id)]).cancel()
             else:
                 if move.move_dest_id:
                     if move.propagate:
@@ -40,9 +36,7 @@ class stock_move(models.Model):
                         move.move_dest_id.write({'state': 'confirmed'})
                 if move.procurement_id:
                     procurements |= move.procurement_id
-
         self.write({'state': 'cancel', 'move_dest_id': False})
         if procurements:
             procurements.check()
         return True
-

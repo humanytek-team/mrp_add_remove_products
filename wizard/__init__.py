@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-import add_products
+from . import add_products
