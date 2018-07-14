@@ -3,7 +3,7 @@
     'name': 'Add products to bom in manufacturing orders',
     'summary': '',
     'author': 'Humanytek',
-    'version': '1.0.1',
+    'version': '1.1.0',
     'description': """
     """,
     'category': 'Mrp',

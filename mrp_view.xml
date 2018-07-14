@@ -12,7 +12,7 @@
           <button name="action_consume_cancel" string="Cancel Move" type="object" icon="fa-times-circle" states="draft,waiting,confirmed,assigned"/>
         </xpath>
         <xpath expr="//field[@name='move_raw_ids']" position="after">
-          <button name="%(mrp_add_remove_products.action_mo_add_product)d" string="Agregar Productos" type="action" states="confirmed" context="{'mo_id': active_id, 'location_id': location_src_id}" colspan="2"/>
+          <button name="%(mrp_add_remove_products.action_mo_add_product)d" string="Agregar Productos" type="action" states="confirmed, planned,progress" context="{'mo_id': active_id, 'location_id': location_src_id}" colspan="2"/>
         </xpath>
       </field>
     </record>
